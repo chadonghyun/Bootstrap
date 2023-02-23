@@ -1,0 +1,35 @@
+  <style>
+    * {box-sizing: border-box;}
+    th, td {
+      padding: 5px 12px;
+      border: 1px solid #333;
+    }
+  </style>
+  <script>
+    $(function(){
+      let theadHTML = '';
+      let tbodyHTML = '';
+      $.getJSON('./data/test_drive.json', function(data){
+          // 0, 1, 2, 3 ...
+          for(key in data){
+            if(key == 0) {
+              theadHTML += '<tr>';
+                // num, name, phone ...
+              for(let key_data in data[key]){
+                theadHTML += '<th>'+key_data+'</th>';
+                }
+              theadHTML += '</tr>';
+              document.querySelector('thead').innerHTML += theadHTML;
+            }
+            // num, name, phone ...
+            tbodyHTML += '<tr>';
+            for(let key_data in data[key]) {
+              //data[0, 1, 2, 3 ...][num, name, phone ...]
+              tbodyHTML += ('<td>'+data[key][key_data]+'</td>');
+            }
+            tbodyHTML += '</tr>';
+            document.querySelector('tbody').innerHTML = tbodyHTML;
+          }
+      })
+    });
+  </script>

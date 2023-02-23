@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자바스크립트 json데이터 출력하기</title>
+  <style>
+    table{
+      border:1px;
+      border-collapse: collapse;
+      width: 1200px;
+      margin: 50px auto;
+    }
+    table caption{
+      background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, purple);
+      color: #fff;
+      font-weight: bold;
+      height: 50px;
+      line-height: 50px;
+    }
+    th{
+      padding: 20px 0px;
+    }
+    td{
+      text-align: center;
+      padding: 7px 0px;
+    }
+  </style>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script>
+    $(function(){
+      $.getJSON('./data/test_drive.json', function(data){
+        let print = '<table>'+'<caption>시승 조회 결과</caption>'+'<thead><tr><th>NO</th><th>이름</th><th>휴대폰번호</th><th>SMS</th><th>이메일</th><th>지역명</th><th>시승종류</th><th>소유차</th><th>시승 신청 날짜</th></tr></thead>'+'<tbody>';
+        for(key in data){
+          print += '<tr>';
+            for(let i in data[key]){
+              print+='<td>' + data[key][i] + '</td>'
+            }
+          print +='</tr>';  
+          // document.write('<tr><td>'+data[key].num+'</td>');
+          // document.write('<td>'+data[key].name+'</td>');
+          // document.write('<td>'+data[key].phone+'</td>');
+          // document.write('<td>'+data[key].sms+'</td>');
+          // document.write('<td>'+data[key].email+'</td>');
+          // document.write('<td>'+data[key].region+'</td>');
+          // document.write('<td>'+data[key].s_car+'</td>');
+          // document.write('<td>'+data[key].my_car+'</td>');
+          // document.write('<td>'+data[key].s_date+'</td></tr>');
+        }
+        print+='</tbody>'+'</table>';
+        $('.print').html(print)
+      });
+    });
+  </script>
+
+
+</head>
+<body>
+  <h2>자바스크립트 json데이터 출력하기</h2>
+  <p>닷홈 SQL데이터 베이스에 저장된 'test_drive'테이블의 자료를 'json'파일로 저장하여 자바스크립트로 출력해보기</p>
+
+  <div class="print"></div>
+</body>
+</html>
